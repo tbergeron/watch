@@ -13,6 +13,8 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "thinair": "~0.3.19"
+    "thinair": "~0.3.19",
+    "phantomjs": "~0.2.3",
+    "optimist": "~0.3.5"
   }
 }
