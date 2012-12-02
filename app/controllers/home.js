@@ -78,6 +78,7 @@ module.exports = ThinAir.createController({
                         path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
+                        fs.writeFileSync('/home/ubuntu/watch/TABARNAK', err);
                        if (err) {
                            console.error('Magician error: ', err);
                        }
