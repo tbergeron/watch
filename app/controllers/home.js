@@ -25,6 +25,7 @@ module.exports = ThinAir.createController({
                        var screenshots = [];
                         files.forEach(function(file) {
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
+                                // todo: generate proper title
                                 screenshots.push({ file: file });
                             }
                         });
@@ -61,30 +62,30 @@ module.exports = ThinAir.createController({
 
                 phantomjs.stdout.on('data', function (data) {
                     name = data;
-                    console.log('stdout: ' + data);
+//                    console.log('stdout: ' + data);
                 });
 
-                phantomjs.stderr.on('data', function (data) {
-                    console.log('stderr: ' + data);
-                });
+//                phantomjs.stderr.on('data', function (data) {
+//                    console.log('stderr: ' + data);
+//                });
 
                 phantomjs.on('exit', function (code) {
                     name = name.toString().replace("\n", "");
                     params.name = name;
 
-                    console.log('cropping ', name);
+//                    console.log('cropping ', name);
 
                     var image = new Magician(
                         path.join(__dirname, '../../public/screenshots/' + name + '.png'),
                         path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
-                       if (err) {
-                           console.error('Magician error: ', err);
-                       }
+//                       if (err) {
+//                           console.error('Magician error: ', err);
+//                       }
                     });
 
-                    console.log('Took screenshot: ', name);
+//                    console.log('Took screenshot: ', name);
                 });
             });
         });
