@@ -21,7 +21,7 @@ module.exports = ThinAir.createController({
 
             this.Websites.getOneByDomain(domain, function(website) {
                if (website) {
-                   fs.readdir(path.join(__dirname, 'public/screenshots'), function(err, files) {
+                   fs.readdir('/home/ubuntu/watch/public/screenshots'), function(err, files) {
                        var screenshots = [];
                         files.forEach(function(file) {
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
@@ -52,8 +52,6 @@ module.exports = ThinAir.createController({
 
     take_screenshots: function(req, res, params) {
         this.Websites.getAll(function(websites) {
-            fs.writeFileSync('/home/ubuntu/watch/TABARNAK', 'TESTING');
-
             var outputString = '';
 
             websites.forEach(function(website) {
@@ -74,19 +72,13 @@ module.exports = ThinAir.createController({
 //                    name = name.toString().replace("\n", "");
                     params.name = name;
 
-                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', '/public/screenshots/' + name + '.png');
-                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', '/public/screenshots/' + name + '_cropped.png');
-
                     console.log('cropping ', name);
 
                     var image = new Magician(
-                        path.join(__dirname, 'public/screenshots/' + name + '.png'),
-                        path.join(__dirname, 'public/screenshots/' + name + '_cropped.png'));
-
-                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', 'entre deux');
+                        '/home/ubuntu/watch/public/screenshots/' + name + '.png',
+                        '/home/ubuntu/watch/public/screenshots/' + name + '_cropped.png');
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
-                        fs.writeFileSync('/home/ubuntu/watch/TABARNAK', err);
                        if (err) {
                            console.error('Magician error: ', err);
                        }

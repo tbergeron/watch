@@ -11,9 +11,7 @@ if (url = system.args[1]) {
             filename = filename.replace(/[:/.?=]/g, ''),
             filename = filename + '_' + getFullDate(date);
 
-        fs.writeFileSync('/home/ubuntu/watch/TABARNAK', filename);
-
-        page.render('public/screenshots/' + filename + '.png');
+        page.render('/home/ubuntu/watch/public/screenshots/' + filename + '.png');
 
         console.log(filename);
 
