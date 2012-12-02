@@ -54,11 +54,11 @@ module.exports = ThinAir.createController({
         this.Websites.getAll(function(websites) {
             var outputString = '';
 
-//            websites.forEach(function(website) {
-//                var phantomjs = spawn('phantomjs', ['screenshot.js', website.url]),
-//                    that = this,
-//                    name = null;
-//
+            websites.forEach(function(website) {
+                var phantomjs = spawn('phantomjs', ['screenshot.js', website.url]),
+                    that = this,
+                    name = null;
+
 //                phantomjs.stdout.on('data', function (data) {
 //                    name = data;
 //                    console.log('stdout: ' + data);
@@ -85,7 +85,7 @@ module.exports = ThinAir.createController({
 //
 //                    console.log('Took screenshot: ', name);
 //                });
-//            });
+            });
         });
     }
 });
