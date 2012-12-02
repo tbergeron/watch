@@ -70,7 +70,7 @@ module.exports = ThinAir.createController({
                 phantomjs.on('exit', function (code) {
                     params.name = name;
 
-                    im.resize({
+                    im.crop({
                         srcData : '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
                         strip : true, width : 320, height : 240
                     }, function(err, stdout, stderr) {
