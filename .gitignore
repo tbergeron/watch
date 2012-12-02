@@ -1,3 +1,4 @@
 public/screenshots/*
 .idea/*
 node_modules/*
+config.js
