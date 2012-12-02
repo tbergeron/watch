@@ -69,7 +69,7 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.on('exit', function (code) {
-//                    name = name.toString().replace("\n", "");
+                    name = name.toString().replace("\n", "");
                     params.name = name;
 
                     console.log('cropping ', name);
