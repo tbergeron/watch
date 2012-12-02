@@ -72,6 +72,8 @@ module.exports = ThinAir.createController({
                 phantomjs.on('exit', function (code) {
                     params.name = name;
 
+                    console.log('cropping ', name);
+
                     im.crop({
                         srcPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
                         dstPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png',
