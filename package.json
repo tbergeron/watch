@@ -4,7 +4,8 @@
   "description": "watch =====",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,11 @@
   "dependencies": {
     "thinair": "~0.3.19",
     "phantomjs": "~0.2.3",
-    "optimist": "~0.3.5"
+    "optimist": "~0.3.5",
+    "node-imagemagick": "~0.1.8"
+  },
+  "subdomain": "watch",
+  "engines": {
+    "node": "0.8.x"
   }
 }

@@ -1,4 +1,5 @@
 {
     "/": { "controller": "home", "action": "index" },
-    "/take_screenshot": { "controller": "home", "action": "take_screenshot" }
+    "/form_request": { "controller": "home", "action": "form_request" },
+    "/take_screenshots": { "controller": "home", "action": "take_screenshots" }
 }

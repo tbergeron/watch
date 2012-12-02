@@ -1,6 +1,8 @@
 {{#if error}}
-Please try again.
+    {{error}}
 {{else}}
-<h1>{{name}}</h1>
-<img src="/screenshots/{{name}}.png" alt="" />
+    {{#each screenshots}}
+        <h1>{{file}}</h1>
+        <img src="/screenshots/{{file}}" style="width:320px" alt="" />
+    {{/each}}
 {{/if}}
