@@ -17,7 +17,8 @@
     "thinair": "~0.3.19",
     "phantomjs": "~0.2.3",
     "optimist": "~0.3.5",
-    "magician": "~0.1.1"
+    "magician": "~0.1.1",
+    "path": "~0.4.9"
   },
   "subdomain": "watch",
   "engines": {
