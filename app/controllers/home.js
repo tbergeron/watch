@@ -71,8 +71,8 @@ module.exports = ThinAir.createController({
                 phantomjs.on('exit', function (code) {
                     params.name = name;
 
-                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '.png'));
-                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
+                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', __dirname + '/public/screenshots/' + name.toString().replace("\n", "") + '.png');
+                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', __dirname + '/public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png');
 
                     console.log('cropping ', name);
 
