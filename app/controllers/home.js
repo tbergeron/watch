@@ -16,7 +16,7 @@ module.exports = ThinAir.createController({
 
     history: function(req, res, params) {
         if ((url = params.post.url) || (domain_from_url = params.domain)) {
-            var domain = (url) ? this.helpers.watch.getDomainFromUrl(url) : domain_from_url,
+            var domain = (typeof url !== undefined) ? this.helpers.watch.getDomainFromUrl(url) : domain_from_url,
                 that = this;
 
             this.Websites.getOneByDomain(domain, function(website) {
