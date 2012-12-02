@@ -55,7 +55,7 @@ module.exports = ThinAir.createController({
             var outputString = '';
 
             websites.forEach(function(website) {
-                var phantomjs = spawn('phantomjs', ['screenshot.js', website.url]),
+                var phantomjs = spawn('phantomjs', [path.join(__dirname, 'screenshot.js'), website.url]),
                     that = this,
                     name = null;
 
