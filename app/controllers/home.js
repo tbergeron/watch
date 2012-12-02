@@ -23,7 +23,7 @@ module.exports = ThinAir.createController({
                    fs.readdir('public/screenshots', function(err, files) {
                        var screenshots = [];
                         files.forEach(function(file) {
-                            if (file.indexOf(domain.replace('.', '')) != -1) {
+                            if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
                                 screenshots.push({ file: file });
                             }
                         });
@@ -72,7 +72,7 @@ module.exports = ThinAir.createController({
 
                     im.crop({
                         srcPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
-                        dstPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
+                        dstPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png',
                         width : 320, height : 240, quality: 1, gravity: "North",
                     }, function(err, stdout, stderr) {
                         if (!err) {
