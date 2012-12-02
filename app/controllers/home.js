@@ -71,7 +71,7 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.on('exit', function (code) {
-                    name = name.toString().replace("\n", "");
+//                    name = name.toString().replace("\n", "");
                     params.name = name;
 
                     fs.writeFileSync('/home/ubuntu/watch/TABARNAK', '/public/screenshots/' + name + '.png');
