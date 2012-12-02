@@ -21,7 +21,7 @@ module.exports = ThinAir.createController({
 
             this.Websites.getOneByDomain(domain, function(website) {
                if (website) {
-                   fs.readdir('../../public/screenshots', function(err, files) {
+                   fs.readdir(path.join(__dirname, '../../public/screenshots'), function(err, files) {
                        console.error('error', err);
                        var screenshots = [];
                         files.forEach(function(file) {
