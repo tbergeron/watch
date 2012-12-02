@@ -23,7 +23,9 @@ module.exports = ThinAir.createController({
                    fs.readdir('public/screenshots', function(err, files) {
                        var screenshots = [];
                         files.forEach(function(file) {
+                            console.log('file', file);
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
+                                console.log('YEAH')
                                 screenshots.push({ file: file });
                             }
                         });
