@@ -1,6 +1,7 @@
 var ThinAir = require('thinair'),
     spawn = require('child_process').spawn,
     fs = require('fs'),
+    path = require('path'),
     Magician = require('magician');
 
 module.exports = ThinAir.createController({
@@ -23,9 +24,7 @@ module.exports = ThinAir.createController({
                    fs.readdir('public/screenshots', function(err, files) {
                        var screenshots = [];
                         files.forEach(function(file) {
-                            console.log('file', file);
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
-                                console.log('YEAH')
                                 screenshots.push({ file: file });
                             }
                         });
@@ -74,7 +73,9 @@ module.exports = ThinAir.createController({
 
                     console.log('cropping ', name);
 
-                    var image = new Magician('public/screenshots/' + name.toString().replace("\n", "") + '.png', 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png');
+                    var image = new Magician(
+                        path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '.png'),
+                        path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
                        if (err) {
