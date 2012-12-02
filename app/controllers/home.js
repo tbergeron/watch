@@ -54,38 +54,38 @@ module.exports = ThinAir.createController({
         this.Websites.getAll(function(websites) {
             var outputString = '';
 
-            websites.forEach(function(website) {
-                var phantomjs = spawn('phantomjs', [path.join(__dirname, 'screenshot.js'), website.url]),
-                    that = this,
-                    name = null;
-
-                phantomjs.stdout.on('data', function (data) {
-                    name = data;
-                    console.log('stdout: ' + data);
-                });
-
-                phantomjs.stderr.on('data', function (data) {
-                    console.log('stderr: ' + data);
-                });
-
-                phantomjs.on('exit', function (code) {
-                    params.name = name;
-
-                    console.log('cropping ', name);
-
-                    var image = new Magician(
-                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '.png'),
-                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
-
-                    image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
-                       if (err) {
-                           console.error('Magician error: ', err);
-                       }
-                    });
-
-                    console.log('Took screenshot: ', name);
-                });
-            });
+//            websites.forEach(function(website) {
+//                var phantomjs = spawn('phantomjs', ['screenshot.js', website.url]),
+//                    that = this,
+//                    name = null;
+//
+//                phantomjs.stdout.on('data', function (data) {
+//                    name = data;
+//                    console.log('stdout: ' + data);
+//                });
+//
+//                phantomjs.stderr.on('data', function (data) {
+//                    console.log('stderr: ' + data);
+//                });
+//
+//                phantomjs.on('exit', function (code) {
+//                    params.name = name;
+//
+//                    console.log('cropping ', name);
+//
+//                    var image = new Magician(
+//                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '.png'),
+//                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
+//
+//                    image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
+//                       if (err) {
+//                           console.error('Magician error: ', err);
+//                       }
+//                    });
+//
+//                    console.log('Took screenshot: ', name);
+//                });
+//            });
         });
     }
 });
