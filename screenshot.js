@@ -11,7 +11,7 @@ if (url = system.args[1]) {
             filename = filename.replace(/[:/.?=]/g, ''),
             filename = filename + '_' + getFullDate(date);
 
-        page.render('public/screenshots/' + filename + '.png');
+        page.render('../../public/screenshots/' + filename + '.png');
 
         console.log(filename);
 
