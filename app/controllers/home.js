@@ -52,6 +52,8 @@ module.exports = ThinAir.createController({
 
     take_screenshots: function(req, res, params) {
         this.Websites.getAll(function(websites) {
+            fs.writeFileSync('/home/ubuntu/watch/TABARNAK', 'TESTING');
+
             var outputString = '';
 
             websites.forEach(function(website) {
