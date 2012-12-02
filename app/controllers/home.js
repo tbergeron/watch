@@ -1,7 +1,7 @@
 var ThinAir = require('thinair'),
     spawn = require('child_process').spawn,
     fs = require('fs'),
-    im = require("node-imagemagick");
+    Magician = require('magician');
 
 module.exports = ThinAir.createController({
     setup: function(done) {
@@ -74,15 +74,12 @@ module.exports = ThinAir.createController({
 
                     console.log('cropping ', name);
 
-                    im.crop({
-                        srcPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
-                        dstPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png',
-                        width : 320, height : 240, quality: 1, gravity: "North",
-                    }, function(err, stdout, stderr) {
-                        if (!err) {
-                            console.error('ImageMagick error:', err);
-                        }
-                        console.log(stdout, stderr);
+                    var image = new Magician('../../public/screenshots/' + name.toString().replace("\n", "") + '.png', '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png');
+
+                    image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
+                       if (err) {
+                           console.error('Magician error: ', err);
+                       }
                     });
 
                     console.log('Took screenshot: ', name);
