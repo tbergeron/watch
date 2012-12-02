@@ -1,5 +1,4 @@
-var system = require('system'),
-    path = require('path');
+var system = require('system');
 
 if (url = system.args[1]) {
     var page = new WebPage();
@@ -11,7 +10,7 @@ if (url = system.args[1]) {
             filename = filename.replace(/[:/.?=]/g, ''),
             filename = filename + '_' + getFullDate(date);
 
-        page.render(path.join(__dirname, 'public/screenshots/' + filename + '.png'));
+        page.render('public/screenshots/' + filename + '.png');
 
         console.log(filename);
 
