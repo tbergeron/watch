@@ -74,8 +74,8 @@ module.exports = ThinAir.createController({
                     console.log('cropping ', name);
 
                     var image = new Magician(
-                        path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '.png'),
-                        path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
+                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '.png'),
+                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
                        if (err) {
