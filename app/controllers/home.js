@@ -59,20 +59,20 @@ module.exports = ThinAir.createController({
                     that = this,
                     name = null;
 
-//                phantomjs.stdout.on('data', function (data) {
-//                    name = data;
-//                    console.log('stdout: ' + data);
-//                });
-//
-//                phantomjs.stderr.on('data', function (data) {
-//                    console.log('stderr: ' + data);
-//                });
-//
-//                phantomjs.on('exit', function (code) {
-//                    params.name = name;
-//
-//                    console.log('cropping ', name);
-//
+                phantomjs.stdout.on('data', function (data) {
+                    name = data;
+                    console.log('stdout: ' + data);
+                });
+
+                phantomjs.stderr.on('data', function (data) {
+                    console.log('stderr: ' + data);
+                });
+
+                phantomjs.on('exit', function (code) {
+                    params.name = name;
+
+                    console.log('cropping ', name);
+
 //                    var image = new Magician(
 //                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '.png'),
 //                        path.join(__dirname, '../../public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
@@ -82,9 +82,9 @@ module.exports = ThinAir.createController({
 //                           console.error('Magician error: ', err);
 //                       }
 //                    });
-//
-//                    console.log('Took screenshot: ', name);
-//                });
+
+                    console.log('Took screenshot: ', name);
+                });
             });
         });
     }
