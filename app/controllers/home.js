@@ -71,11 +71,15 @@ module.exports = ThinAir.createController({
                 phantomjs.on('exit', function (code) {
                     params.name = name;
 
+                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', 'cropping');
+
                     console.log('cropping ', name);
 
                     var image = new Magician(
                         path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '.png'),
                         path.join(__dirname, 'public/screenshots/' + name.toString().replace("\n", "") + '_cropped.png'));
+
+                    fs.writeFileSync('/home/ubuntu/watch/TABARNAK', 'entre deux');
 
                     image.crop({x: 0, y: 0, width: 320, height: 240}, function(err) {
                         fs.writeFileSync('/home/ubuntu/watch/TABARNAK', err);
