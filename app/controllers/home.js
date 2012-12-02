@@ -22,6 +22,7 @@ module.exports = ThinAir.createController({
             this.Websites.getOneByDomain(domain, function(website) {
                if (website) {
                    fs.readdir('../../public/screenshots', function(err, files) {
+                       console.error('error', err);
                        var screenshots = [];
                         files.forEach(function(file) {
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
