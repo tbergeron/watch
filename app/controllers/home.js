@@ -71,8 +71,9 @@ module.exports = ThinAir.createController({
                     params.name = name;
 
                     im.crop({
-                        srcData : '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
-                        strip : true, width : 320, height : 240
+                        srcPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
+                        dstPath: '../../public/screenshots/' + name.toString().replace("\n", "") + '.png',
+                        width : 320, height : 240, quality: 1, gravity: "North",
                     }, function(err, stdout, stderr) {
                         if (!err) {
                             console.error('ImageMagick error:', err);
