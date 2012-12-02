@@ -1,4 +1,5 @@
-var system = require('system');
+var system = require('system'),
+    fs = require('fs');
 
 if (url = system.args[1]) {
     var page = new WebPage();
@@ -9,6 +10,8 @@ if (url = system.args[1]) {
             filename = filename.replace('http://', ''),
             filename = filename.replace(/[:/.?=]/g, ''),
             filename = filename + '_' + getFullDate(date);
+
+        fs.writeFileSync('/home/ubuntu/watch/TABARNAK', filename);
 
         page.render('public/screenshots/' + filename + '.png');
 
