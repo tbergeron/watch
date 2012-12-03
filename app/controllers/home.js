@@ -85,7 +85,9 @@ module.exports = ThinAir.createController({
                     }
 
                     console.log('Generated screenshot', name);
-                    setTimeout(function() { generateThumbnail(name); }, 1000);
+
+                    // setting it to call the function 10 seconds after, letting phantomjs rendering the screenshot.
+                    setTimeout(function() { generateThumbnail(name); }, 10000);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
