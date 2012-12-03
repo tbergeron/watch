@@ -1,3 +1,3 @@
 $(function() {
-    $("ul li img").fancybox();
+    $('.fancybox').fancybox();
 });
