@@ -74,7 +74,8 @@ module.exports = ThinAir.createController({
                 phantomjs.stdout.on('data', function (data) {
                     if (!that.names) that.names = [];
                     that.names[website.domain] = data.toString().replace("\n", "");
-//                    console.log('stdout: ' + data);
+
+                    console.log('stdout: ' + data);
 
                     i = i - 1;
                     if (i <= 0) {
