@@ -32,9 +32,6 @@ module.exports = ThinAir.createController({
                                     time = file_split[2].replace(/-/gi, ':'),
                                     full_date = date + ' ' + time;
 
-
-
-                                // todo: generate proper title
                                 screenshots.push({ file: file, date: full_date });
                             }
                         });
