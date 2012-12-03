@@ -93,7 +93,7 @@ module.exports = ThinAir.createController({
                     console.log('Generating screenshot', name);
 
                     // setting it to call the function 10 seconds after, letting phantomjs rendering the screenshot.
-                    setTimeout(function() { generateThumbnail(name, counter); }, 10000);
+                    setTimeout(function() { generateThumbnail(name, counter, res); }, 10000);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
@@ -105,9 +105,6 @@ module.exports = ThinAir.createController({
 //                });
             });
         });
-
-        res.writeHead(200, {'Content-Type': 'text/plain' });
-        res.end('status');
     }
 });
 
@@ -121,7 +118,7 @@ function getFullDate(d){
         + pad(d.getSeconds())+'';
 }
 
-function generateThumbnail(name, counter) {
+function generateThumbnail(name, counter, res) {
     var image = new Magician(
         path.join(__dirname, '../../public/screenshots/' + name + '.png'),
         path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
@@ -132,6 +129,8 @@ function generateThumbnail(name, counter) {
 
         if (counter <= 0) {
             console.log('Done.');
+            res.writeHead(200, {'Content-Type': 'text/plain' });
+            res.end('status');
             phantom.exit();
         }
     });
