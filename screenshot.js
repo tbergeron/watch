@@ -14,8 +14,8 @@ if (url = system.args[1]) {
         if (status == 'fail') {
             console.log('fail', url);
         } else {
-            console.log(filename);
             page.render('/home/ubuntu/watch/public/screenshots/' + filename + '.png');
+            console.log(filename);
             phantom.exit();
         }
     });
