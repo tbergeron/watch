@@ -86,6 +86,8 @@ module.exports = ThinAir.createController({
                     console.log('Took screenshot: ', name);
                 });
             });
+
+            this.sendJson(res, { status: 'success' }, 200);
         });
     }
 });
