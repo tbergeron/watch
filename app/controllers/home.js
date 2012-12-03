@@ -94,7 +94,6 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.stderr.on('data', function (data) {
-                    i = i - 1;
                     console.log('stderr: ' + data);
                 });
 
