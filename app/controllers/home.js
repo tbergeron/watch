@@ -82,6 +82,9 @@ module.exports = ThinAir.createController({
 
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
+
+                        fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
+                            .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png')));
                     } else {
                         var image = new Magician(
                             path.join(__dirname, '../../public/screenshots/' + name + '.png'),
