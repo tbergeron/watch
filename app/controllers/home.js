@@ -74,7 +74,13 @@ module.exports = ThinAir.createController({
                 phantomjs.stdout.on('data', function (data) {
                     if (!that.names) that.names = [];
                     that.names[website.domain] = data.toString().replace("\n", "");
-                    console.log('stdout: ' + data);
+//                    console.log('stdout: ' + data);
+
+                    i = i - 1;
+                    if (i <= 0) {
+                        console.log('generate go!');
+                        generateScreenshots(req, res, params);
+                    }
                 });
 
                 phantomjs.stderr.on('data', function (data) {
@@ -82,14 +88,8 @@ module.exports = ThinAir.createController({
                     i = i - 1;
                 });
 
-                phantomjs.on('exit', function (code) {
-                    i = i - 1;
-                    console.log('eh', i);
-                    if (i <= 0) {
-                        console.log('generate go!');
-                        generateScreenshots(req, res, params);
-                    }
-                });
+//                phantomjs.on('exit', function (code) {
+//                });
             });
         });
     }
