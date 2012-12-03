@@ -72,12 +72,12 @@ module.exports = ThinAir.createController({
 
                 phantomjs.stdout.on('data', function (data) {
                     name = data;
-//                    console.log('stdout: ' + data);
+                    console.log('stdout: ' + data);
                 });
 
-//                phantomjs.stderr.on('data', function (data) {
-//                    console.log('stderr: ' + data);
-//                });
+                phantomjs.stderr.on('data', function (data) {
+                    console.log('stderr: ' + data);
+                });
 
                 phantomjs.on('exit', function (code) {
                     name = name.toString().replace("\n", "");
