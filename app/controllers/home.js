@@ -90,7 +90,7 @@ module.exports = ThinAir.createController({
                     i = i - 1;
                     if (i <= 0) {
                         res.writeHead(200, {'Content-Type': 'text/plain' });
-                        res.end({ status: 'success' });
+                        res.end('status');
                     }
 
                     console.log('Took screenshot: ', name);
