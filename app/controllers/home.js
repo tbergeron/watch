@@ -91,7 +91,7 @@ module.exports = ThinAir.createController({
                     counter--;
 
                     console.log('Generating screenshot' + name);
-                    res.write('Generating screenshot' + name);
+                    res.write('Generating screenshot' + name + "\n");
 
                     // setting it to call the function 10 seconds after, letting phantomjs rendering the screenshot.
                     setTimeout(function() { generateThumbnail(name, counter, res); }, 10000);
@@ -102,8 +102,9 @@ module.exports = ThinAir.createController({
 //                    console.log('stderr: ' + data);
                 });
 
-//                phantomjs.on('exit', function (code) {
-//                });
+                phantomjs.on('exit', function (code) {
+                    console.log('Process closed:', code);
+                });
             });
         });
     }
@@ -126,8 +127,8 @@ function generateThumbnail(name, counter, res) {
 
     image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
         console.log('eh', err, name);
-        if (err) res.write('Magician error: ' + err);
-        else res.write('Cropped screenshot: ' + name);
+        if (err) res.write('Magician error: ' + err + "\n");
+        else res.write('Cropped screenshot: ' + name + "\n");
 
         if (counter <= 0) {
             console.log('Done.');
