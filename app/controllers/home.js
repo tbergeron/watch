@@ -70,7 +70,9 @@ module.exports = ThinAir.createController({
                     that = this;
 
                 phantomjs.stdout.on('data', function (data) {
-                    if (data.toString().indexOf('fail') !== -1) {
+                    var name = data.toString().replace("\n", "");
+
+                    if (name.indexOf('fail') !== -1) {
                         var split = name.split(' '),
                             name = split[1];
 
@@ -79,8 +81,6 @@ module.exports = ThinAir.createController({
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     } else {
-                        var name = data.toString().replace("\n", "");
-
                         var image = new Magician(
                             path.join(__dirname, '../../public/screenshots/' + name + '.png'),
                             path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
