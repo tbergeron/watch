@@ -78,9 +78,7 @@ module.exports = ThinAir.createController({
                             name = name.replace('http://www.', ''),
                             name = name.replace('http://', ''),
                             name = name.replace(/[:/.?=]/g, ''),
-                            name = name + '_' + getFullDate(date);
-
-                        console.log('split', split);
+                            name = name + '_' + getFullDate(new Date());
 
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
@@ -98,7 +96,7 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.stderr.on('data', function (data) {
-                    console.log('stderr: ' + data);
+//                    console.log('stderr: ' + data);
                 });
 
 //                phantomjs.on('exit', function (code) {
