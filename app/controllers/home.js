@@ -60,18 +60,13 @@ module.exports = ThinAir.createController({
 
     take_screenshots: function(req, res, params) {
         var that = this;
+        that.counter = 0;
 
         this.Websites.getAll(function(websites) {
-            var outputString = '',
-                that = this;
-
-            counter = 0;
 
             websites.forEach(function(website) {
-                var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
-                    that = this;
-
-                counter++;
+                var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]);
+                that.counter++;
 
                 phantomjs.stdout.on('data', function (data) {
                     var name = data.toString().replace("\n", "");
@@ -89,20 +84,19 @@ module.exports = ThinAir.createController({
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     }
 
-                    counter--;
+                    that.counter--;
 
-                    generateThumbnail(name, counter, res);
+                    generateThumbnail(name, that.counter, res);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
-                    counter--;
+                    that.counter--;
                     generateThumbnail(null, counter, res);
 //                    console.log('stderr: ' + data);
                 });
 
                 phantomjs.on('exit', function (code) {
-                    counter--;
-                    console.log('Process closed:', code);
+//                    console.log('Process closed:', code);
                 });
             });
         });
@@ -129,23 +123,16 @@ function generateThumbnail(name, counter, res) {
             path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
 
         image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
-            console.log('eh', err, name);
-            if (err) res.write('Magician error: ' + err + "\n");
-            else res.write('Cropped screenshot: ' + name + "\n");
+            if (err) console.log('Magician error: ', err);
+            else console.log('Cropped screenshot: ', name);
 
-            if (counter <= 0) {
-                console.log('Done.');
-                res.writeHead(200, {'Content-Type': 'text/plain' });
-                res.end('status');
-                phantom.exit();
-            }
+            generateThumbnail(null, counter, res);
         });
     } else {
         if (counter <= 0) {
             console.log('Done.');
             res.writeHead(200, {'Content-Type': 'text/plain' });
             res.end('status');
-            phantom.exit();
         }
     }
 }
