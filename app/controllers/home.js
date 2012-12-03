@@ -85,7 +85,7 @@ module.exports = ThinAir.createController({
                     }
 
                     console.log('Generated screenshot', name);
-                    setTimeout(function() { generateThumbnail(name) }, 1000;
+                    setTimeout(function() { generateThumbnail(name); }, 1000);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
