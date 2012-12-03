@@ -7,7 +7,7 @@ var ThinAir = require('thinair'),
 module.exports = ThinAir.createController({
     setup: function(done) {
         this.Websites = this.repositories.Websites;
-        this.names = [];
+        this.counter = 0;
         done();
     },
 
@@ -65,9 +65,13 @@ module.exports = ThinAir.createController({
             var outputString = '',
                 that = this;
 
+            counter = 0;
+
             websites.forEach(function(website) {
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this;
+
+                counter++;
 
                 phantomjs.stdout.on('data', function (data) {
                     var name = data.toString().replace("\n", "");
@@ -84,13 +88,16 @@ module.exports = ThinAir.createController({
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     }
 
+                    counter--;
+
                     console.log('Generating screenshot', name);
 
                     // setting it to call the function 10 seconds after, letting phantomjs rendering the screenshot.
-                    setTimeout(function() { generateThumbnail(name); }, 10000);
+                    setTimeout(function() { generateThumbnail(name, counter); }, 10000);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
+                    counter--;
 //                    console.log('stderr: ' + data);
                 });
 
@@ -114,7 +121,7 @@ function getFullDate(d){
         + pad(d.getSeconds())+'';
 }
 
-function generateThumbnail(name) {
+function generateThumbnail(name, counter) {
     var image = new Magician(
         path.join(__dirname, '../../public/screenshots/' + name + '.png'),
         path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
@@ -122,5 +129,10 @@ function generateThumbnail(name) {
     image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
         if (err) console.error('Magician error: ', err);
         else console.log('Cropped screenshot: ', name);
+
+        if (counter <= 0) {
+            console.log('Done.');
+            phantom.exit();
+        }
     });
 }
