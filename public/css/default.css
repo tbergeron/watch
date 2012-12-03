@@ -1,5 +1,6 @@
 ul li.screenshot {
     text-align: center;
+    padding: 4px;
 }
 
 ul li.screenshot img {
