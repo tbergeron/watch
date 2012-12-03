@@ -85,15 +85,7 @@ module.exports = ThinAir.createController({
                     }
 
                     console.log('Generated screenshot', name);
-
-                    var image = new Magician(
-                        path.join(__dirname, '../../public/screenshots/' + name + '.png'),
-                        path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
-
-                    image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
-                       if (err) console.error('Magician error: ', err);
-                       else console.log('Cropped screenshot: ', name);
-                    });
+                    setTimeout(function() { generateThumbnail(name) }, 1000;
                 });
 
                 phantomjs.stderr.on('data', function (data) {
@@ -118,4 +110,15 @@ function getFullDate(d){
         + pad(d.getHours())+'-'
         + pad(d.getMinutes())+'-'
         + pad(d.getSeconds())+'';
+}
+
+function generateThumbnail(name) {
+    var image = new Magician(
+        path.join(__dirname, '../../public/screenshots/' + name + '.png'),
+        path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+
+    image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
+        if (err) console.error('Magician error: ', err);
+        else console.log('Cropped screenshot: ', name);
+    });
 }
