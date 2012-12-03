@@ -27,8 +27,15 @@ module.exports = ThinAir.createController({
                        var screenshots = [];
                         files.forEach(function(file) {
                             if ((file.indexOf(domain.replace('.', '')) != -1) && (file.indexOf('_cropped') != -1)) {
+                                var file_split = file.split('_'),
+                                    date = file_split[1],
+                                    time = file_split[2].replace(/-/gi, ':'),
+                                    full_date = date + ' ' + time;
+
+
+
                                 // todo: generate proper title
-                                screenshots.push({ file: file });
+                                screenshots.push({ file: file, date: full_date });
                             }
                         });
 
