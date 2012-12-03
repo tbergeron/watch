@@ -1,10 +1,18 @@
+{{> header}}
+
 {{#if error}}
     {{error}}
 {{else}}
+<ul class="thumbnails">
     {{#each screenshots}}
-        <div class="screenshot">
-            <div>{{file}}</div>
-            <img src="/screenshots/{{file}}" alt="" />
-        </div>
+        <li class="span4 screenshot">
+            <a href="#" class="thumbnail">
+                <img src="/screenshots/{{file}}" alt="">
+                <div>{{file}}</div>
+            </a>
+        </li>
     {{/each}}
+</ul>
 {{/if}}
+
+{{> footer}}
