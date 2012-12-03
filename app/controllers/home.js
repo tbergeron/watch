@@ -84,15 +84,17 @@ module.exports = ThinAir.createController({
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     }
 
+                    console.log('Generated screenshot', name);
+
                     var image = new Magician(
                         path.join(__dirname, '../../public/screenshots/' + name + '.png'),
                         path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
-//                       if (err) console.error('Magician error: ', err);
+                       if (err) console.error('Magician error: ', err);
                     });
 
-                    console.log('Took screenshot: ', name);
+                    console.log('Cropped screenshot: ', name);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
