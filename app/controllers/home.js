@@ -80,6 +80,7 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.on('exit', function (code) {
+                    console.log('TABARNAK', name);
                     name = name.toString().replace("\n", "");
                     params.name = name;
 
