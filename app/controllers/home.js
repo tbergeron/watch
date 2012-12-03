@@ -87,6 +87,8 @@ module.exports = ThinAir.createController({
                         var split = name.split(' '),
                             name = split[1];
 
+                        console.log('split', split);
+
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     } else {
