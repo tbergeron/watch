@@ -1,18 +1,37 @@
 {{> header}}
 
-{{#if error}}
-    {{error}}
-{{else}}
-<ul class="thumbnails">
-    {{#each screenshots}}
-        <li class="span4 screenshot">
-            <a href="#" class="thumbnail">
-                <img src="/screenshots/{{file}}" alt="">
-                <div>{{file}}</div>
-            </a>
-        </li>
-    {{/each}}
-</ul>
-{{/if}}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Sticky footer</h1>
+    </div>
+
+    <div id="wrap">
+
+        {{#if error}}
+            {{error}}
+        {{else}}
+        <ul class="thumbnails">
+            {{#each screenshots}}
+                <li class="span4 screenshot">
+                    <a href="#" class="thumbnail">
+                        <img src="/screenshots/{{file}}" alt="">
+                        <div>{{file}}</div>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+
+    </div>
+
+    <div id="push"></div>
+</div>
+
+<div id="footer">
+    <div class="container">
+        <p class="muted credit">This application is provided by <a href="http://brainpad.org">Brainpad</a>.</p>
+    </div>
+</div>
 
 {{> footer}}
