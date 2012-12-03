@@ -4,3 +4,7 @@
     margin: 15px;
     border:1px solid black;
 }
+
+.screenshot img {
+    width: 320px;
+}
