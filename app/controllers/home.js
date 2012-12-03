@@ -70,28 +70,26 @@ module.exports = ThinAir.createController({
                     that = this;
 
                 phantomjs.stdout.on('data', function (data) {
-                    if (data) {
-                        if (data.indexOf('fail') !== -1) {
-                            var split = name.split(' '),
-                                name = split[1];
+                    if (data.toString().indexOf('fail') !== -1) {
+                        var split = name.split(' '),
+                            name = split[1];
 
-                            console.log('split', split);
+                        console.log('split', split);
 
-                            fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
-                                .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
-                        } else {
-                            var name = data.toString().replace("\n", "");
+                        fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
+                            .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
+                    } else {
+                        var name = data.toString().replace("\n", "");
 
-                            var image = new Magician(
-                                path.join(__dirname, '../../public/screenshots/' + name + '.png'),
-                                path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+                        var image = new Magician(
+                            path.join(__dirname, '../../public/screenshots/' + name + '.png'),
+                            path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
 
-                            image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
+                        image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
 //                       if (err) console.error('Magician error: ', err);
-                            });
+                        });
 
-                            console.log('Took screenshot: ', name);
-                        }
+                        console.log('Took screenshot: ', name);
                     }
                 });
 
