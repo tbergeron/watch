@@ -65,6 +65,7 @@ module.exports = ThinAir.createController({
 
 
             websites.forEach(function(website) {
+                console.log('website', website);
                 i = i + 1;
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this,
