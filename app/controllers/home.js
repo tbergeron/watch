@@ -68,6 +68,8 @@ module.exports = ThinAir.createController({
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]);
                 that.counter++;
 
+                console.log('Browsing ', website.domain);
+
                 phantomjs.stdout.on('data', function (data) {
                     var name = data.toString().replace("\n", "");
 
