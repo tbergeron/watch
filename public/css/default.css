@@ -1,3 +1,7 @@
 ul li.screenshot {
     text-align: center;
 }
+
+ul li.screenshot img {
+    margin-bottom: 2px;
+}
