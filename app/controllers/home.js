@@ -68,6 +68,7 @@ module.exports = ThinAir.createController({
 
             websites.forEach(function(website) {
                 i = i + 1;
+                console.log('up', i);
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this;
 
@@ -78,6 +79,7 @@ module.exports = ThinAir.createController({
                     console.log('stdout: ' + data);
 
                     i = i - 1;
+                    console.log('i', i);
                     if (i <= 0) {
                         console.log('generate go!');
                         generateScreenshots(req, res, params);
@@ -85,8 +87,8 @@ module.exports = ThinAir.createController({
                 });
 
                 phantomjs.stderr.on('data', function (data) {
-                    console.log('stderr: ' + data);
                     i = i - 1;
+                    console.log('stderr: ' + data);
                 });
 
 //                phantomjs.on('exit', function (code) {
