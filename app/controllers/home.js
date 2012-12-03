@@ -7,7 +7,7 @@ var ThinAir = require('thinair'),
 module.exports = ThinAir.createController({
     setup: function(done) {
         this.Websites = this.repositories.Websites;
-        that.names = [];
+        this.names = [];
         done();
     },
 
