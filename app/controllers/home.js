@@ -72,7 +72,7 @@ module.exports = ThinAir.createController({
 
                 phantomjs.stdout.on('data', function (data) {
                     that.counter--;
-                    console.log('stdout:', data);
+                    console.log('stdout:', data.toString());
                     var name = data.toString().replace("\n", "");
 
                     // if down
