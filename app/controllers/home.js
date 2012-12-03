@@ -55,7 +55,8 @@ module.exports = ThinAir.createController({
 
     take_screenshots: function(req, res, params) {
         this.Websites.getAll(function(websites) {
-            var outputString = '';
+            var outputString = '',
+                that = this;
 
             websites.forEach(function(website) {
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
@@ -87,7 +88,7 @@ module.exports = ThinAir.createController({
                 });
             });
 
-            this.sendJson(res, { status: 'success' }, 200);
+            that.sendJson(res, { status: 'success' }, 200);
         });
     }
 });
