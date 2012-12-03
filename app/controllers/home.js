@@ -88,7 +88,8 @@ module.exports = ThinAir.createController({
                 });
             });
 
-            that.sendJson(res, { status: 'success' }, 200);
+            res.writeHead(200, {'Content-Type': 'text/plain' });
+            res.end(1);
         });
     }
 });
