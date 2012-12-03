@@ -71,6 +71,8 @@ module.exports = ThinAir.createController({
                 console.log('Browsing ', website.domain);
 
                 phantomjs.stdout.on('data', function (data) {
+                    that.counter--;
+                    console.log('stdout:', data);
                     var name = data.toString().replace("\n", "");
 
                     // if down
@@ -85,16 +87,13 @@ module.exports = ThinAir.createController({
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
                     }
-
-                    that.counter--;
-
                     generateThumbnail(name, that.counter, res);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
                     that.counter--;
+                    console.log('stderr: ' + data);
                     generateThumbnail(null, counter, res);
-//                    console.log('stderr: ' + data);
                 });
 
                 phantomjs.on('exit', function (code) {
@@ -116,10 +115,10 @@ function getFullDate(d){
 }
 
 function generateThumbnail(name, counter, res) {
-    console.log('generateThumbnail:', name);
-    console.log('counter:', counter);
-
     if (name) {
+        console.log('generateThumbnail:', name);
+        console.log('counter:', counter);
+
         var image = new Magician(
             path.join(__dirname, '../../public/screenshots/' + name + '.png'),
             path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
