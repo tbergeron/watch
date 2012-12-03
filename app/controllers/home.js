@@ -74,7 +74,10 @@ module.exports = ThinAir.createController({
 
                     if (name.indexOf('fail') !== -1) {
                         var split = name.split(' '),
-                            name = split[1];
+                            name = split[1],
+                            name = name.replace('http://www.', ''),
+                            name = name.replace('http://', ''),
+                            name = name.replace(/[:/.?=]/g, '');
 
                         console.log('split', split);
 
