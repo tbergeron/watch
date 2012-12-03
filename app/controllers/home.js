@@ -83,21 +83,29 @@ module.exports = ThinAir.createController({
                     name = name.toString().replace("\n", "");
                     params.name = name;
 
-                    var image = new Magician(
-                        path.join(__dirname, '../../public/screenshots/' + name + '.png'),
-                        path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+                    if (name.indexOf('fail') !== -1) {
+                        var split = name.split(' '),
+                            name = split[1];
 
-                    image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
+                        fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
+                            .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
+                    } else {
+                        var image = new Magician(
+                            path.join(__dirname, '../../public/screenshots/' + name + '.png'),
+                            path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+
+                        image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
 //                       if (err) console.error('Magician error: ', err);
-                    });
+                        });
 
-                    i = i - 1;
-                    if (i <= 0) {
-                        res.writeHead(200, {'Content-Type': 'text/plain' });
-                        res.end('status');
+                        i = i - 1;
+                        if (i <= 0) {
+                            res.writeHead(200, {'Content-Type': 'text/plain' });
+                            res.end('status');
+                        }
+
+                        console.log('Took screenshot: ', name);
                     }
-
-                    console.log('Took screenshot: ', name);
                 });
             });
         });
