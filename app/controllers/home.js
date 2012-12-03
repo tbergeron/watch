@@ -19,6 +19,8 @@ module.exports = ThinAir.createController({
             var domain = ((params.post) && (params.post.url)) ? this.helpers.watch.getDomainFromUrl(params.post.url) : params.domain,
                 that = this;
 
+            if (!url) var url = 'http://' + domain;
+
             this.Websites.getOneByDomain(domain, function(website) {
                if (website) {
                    fs.readdir(path.join(__dirname, '../../public/screenshots'), function(err, files) {
