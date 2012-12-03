@@ -82,20 +82,17 @@ module.exports = ThinAir.createController({
 
                         fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
                             .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
-
-                        fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
-                            .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png')));
-                    } else {
-                        var image = new Magician(
-                            path.join(__dirname, '../../public/screenshots/' + name + '.png'),
-                            path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
-
-                        image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
-//                       if (err) console.error('Magician error: ', err);
-                        });
-
-                        console.log('Took screenshot: ', name);
                     }
+
+                    var image = new Magician(
+                        path.join(__dirname, '../../public/screenshots/' + name + '.png'),
+                        path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+
+                    image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
+//                       if (err) console.error('Magician error: ', err);
+                    });
+
+                    console.log('Took screenshot: ', name);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
