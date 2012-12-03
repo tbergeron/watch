@@ -2,10 +2,6 @@ ul li.screenshot {
     text-align: center;
 }
 
-ul li.screenshot a {
-    padding: 4px;
-}
-
 ul li.screenshot img {
     margin-bottom: 4px;
 }
