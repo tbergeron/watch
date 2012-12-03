@@ -68,21 +68,31 @@ module.exports = ThinAir.createController({
 
             websites.forEach(function(website) {
                 i = i + 1;
-                console.log('up', i);
+                console.log('up', i, website.domain);
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this;
 
                 phantomjs.stdout.on('data', function (data) {
-                    if (!that.names) that.names = [];
-                    that.names[website.domain] = data.toString().replace("\n", "");
+                    if (data.indexOf('fail') !== -1) {
+                        var split = name.split(' '),
+                            name = split[1];
 
-                    console.log('stdout: ' + data);
+                        console.log('split', split);
 
-                    i = i - 1;
-                    console.log('i', i);
-                    if (i <= 0) {
-                        console.log('generate go!');
-                        generateScreenshots(req, res, params);
+                        fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
+                            .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
+                    } else {
+                        var name = data.toString().replace("\n", "");
+
+                        var image = new Magician(
+                            path.join(__dirname, '../../public/screenshots/' + name + '.png'),
+                            path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
+
+                        image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
+//                       if (err) console.error('Magician error: ', err);
+                        });
+
+                        console.log('Took screenshot: ', name);
                     }
                 });
 
@@ -95,35 +105,8 @@ module.exports = ThinAir.createController({
 //                });
             });
         });
+
+        res.writeHead(200, {'Content-Type': 'text/plain' });
+        res.end('status');
     }
 });
-
-function generateScreenshots(req, res, params) {
-    names.forEach(function(name) {
-        params.name = name;
-
-        if (name.indexOf('fail') !== -1) {
-            var split = name.split(' '),
-                name = split[1];
-
-            console.log('split', split);
-
-            fs.createReadStream(path.join(__dirname, '../../public/img/offline.jpg'))
-                .pipe(fs.createWriteStream(path.join(__dirname, '../../public/screenshots/' + name + '.png')));
-
-        } else {
-            var image = new Magician(
-                path.join(__dirname, '../../public/screenshots/' + name + '.png'),
-                path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
-
-            image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
-//                       if (err) console.error('Magician error: ', err);
-            });
-
-            console.log('Took screenshot: ', name);
-        }
-    });
-
-    res.writeHead(200, {'Content-Type': 'text/plain' });
-    res.end('status');
-}
