@@ -56,9 +56,12 @@ module.exports = ThinAir.createController({
     take_screenshots: function(req, res, params) {
         this.Websites.getAll(function(websites) {
             var outputString = '',
-                that = this;
+                that = this,
+                i = 0;
+
 
             websites.forEach(function(website) {
+                i = i + 1;
                 var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this,
                     name = null;
@@ -84,12 +87,15 @@ module.exports = ThinAir.createController({
 //                       if (err) console.error('Magician error: ', err);
                     });
 
+                    i = i - 1;
+                    if (i <= 0) {
+                        res.writeHead(200, {'Content-Type': 'text/plain' });
+                        res.end({ status: 'success' });
+                    }
+
                     console.log('Took screenshot: ', name);
                 });
             });
-
-            res.writeHead(200, {'Content-Type': 'text/plain' });
-            res.end(1);
         });
     }
 });
