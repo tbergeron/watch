@@ -92,9 +92,8 @@ module.exports = ThinAir.createController({
 
                     image.crop({x: 0, y: 0, width: 260, height: 180}, function(err) {
                        if (err) console.error('Magician error: ', err);
+                       else console.log('Cropped screenshot: ', name);
                     });
-
-                    console.log('Cropped screenshot: ', name);
                 });
 
                 phantomjs.stderr.on('data', function (data) {
