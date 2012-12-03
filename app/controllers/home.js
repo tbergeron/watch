@@ -38,7 +38,7 @@ module.exports = ThinAir.createController({
                        if (errors) {
                            console.error(errors);
                        } else {
-                           params.error = 'Your website has been added to the list! Come back in 60 minutes.';
+                           params.error = 'Your website has been added to the list, please come back in 30 minutes!';
                            that.sendTemplate(req, res, 'view', params);
                        }
                    });
@@ -56,7 +56,7 @@ module.exports = ThinAir.createController({
             var outputString = '';
 
             websites.forEach(function(website) {
-                var phantomjs = spawn('phantomjs', ['screenshot.js', website.url]),
+                var phantomjs = spawn('/usr/local/bin/phantomjs', ['/home/ubuntu/watch/screenshot.js', website.url]),
                     that = this,
                     name = null;
 
@@ -73,16 +73,12 @@ module.exports = ThinAir.createController({
                     name = name.toString().replace("\n", "");
                     params.name = name;
 
-//                    console.log('cropping ', name);
-
                     var image = new Magician(
                         path.join(__dirname, '../../public/screenshots/' + name + '.png'),
                         path.join(__dirname, '../../public/screenshots/' + name + '_cropped.png'));
 
                     image.crop({x: 0, y: 0, width: 1080, height: 720}, function(err) {
-//                       if (err) {
-//                           console.error('Magician error: ', err);
-//                       }
+//                       if (err) console.error('Magician error: ', err);
                     });
 
                     console.log('Took screenshot: ', name);
