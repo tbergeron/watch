@@ -77,7 +77,8 @@ module.exports = ThinAir.createController({
                             name = split[1],
                             name = name.replace('http://www.', ''),
                             name = name.replace('http://', ''),
-                            name = name.replace(/[:/.?=]/g, '');
+                            name = name.replace(/[:/.?=]/g, ''),
+                            name = name + '_' + getFullDate(date);
 
                         console.log('split', split);
 
@@ -109,3 +110,13 @@ module.exports = ThinAir.createController({
         res.end('status');
     }
 });
+
+function getFullDate(d){
+    function pad(n){return n<10 ? '0'+n : n}
+    return d.getFullYear()+'-'
+        + pad(d.getMonth()+1)+'-'
+        + pad(d.getDate())+'_'
+        + pad(d.getHours())+'-'
+        + pad(d.getMinutes())+'-'
+        + pad(d.getSeconds())+'';
+}
